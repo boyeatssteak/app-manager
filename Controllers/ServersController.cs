@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace AppManager.Controllers
         }
 
         // GET api/users
-        [HttpGet]
+        [HttpGet, Authorize]
         public IEnumerable<Server> GetServers()
         {
             return _context.Servers;
