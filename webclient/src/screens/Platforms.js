@@ -1,17 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import PageHeader from '../components/PageHeader';
 
-class Home extends React.Component {
-
+class Platforms extends React.Component {
   render() {
     return (
       <div className="container">
-        <PageHeader title="App Manager" />
-        <p>Stuff and nonsense.</p>
+        <PageHeader title="Platforms" />
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Platforms;
