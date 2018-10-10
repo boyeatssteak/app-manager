@@ -30,19 +30,19 @@ namespace AppManager
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            // {
+            //     options.TokenValidationParameters = new TokenValidationParameters
+            //     {
+            //         ValidateIssuer = true,
+            //         ValidateAudience = true,
+            //         ValidateLifetime = true,
+            //         ValidateIssuerSigningKey = true,
+            //         ValidIssuer = Configuration["Jwt:Issuer"],
+            //         ValidAudience = Configuration["Jwt:Issuer"],
+            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+            //     };
+            // });
             services.AddDbContext<AppManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddSpaStaticFiles( configuration =>
@@ -59,7 +59,7 @@ namespace AppManager
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            // app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -72,19 +72,19 @@ namespace AppManager
                 );
             });
 
-            // app.UseSpa( spa =>
-            // {
-            //     spa.Options.SourcePath = "WebClient";
-            //     if ( env.IsDevelopment())
-            //     {
-            //         spa.UseReactDevelopmentServer(npmScript: "start");
-            //     }
-            // });
-
-            app.Run(async (context) =>
+            app.UseSpa( spa =>
             {
-                await context.Response.WriteAsync("Hello World!x1519\n" + Configuration);
+                spa.Options.SourcePath = "WebClient";
+                if ( env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
+
+            // app.Run(async (context) =>
+            // {
+            //     await context.Response.WriteAsync("Hello World!x1519\n" + Configuration);
+            // });
         }
     }
 }

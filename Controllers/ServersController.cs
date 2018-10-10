@@ -24,7 +24,8 @@ namespace AppManager.Controllers
         }
 
         // GET api/users
-        [HttpGet, Authorize]
+        // [HttpGet, Authorize]
+        [HttpGet]
         public IEnumerable<Server> GetServers()
         {
             return _context.Servers;
