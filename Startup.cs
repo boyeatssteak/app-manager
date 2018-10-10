@@ -47,7 +47,7 @@ namespace AppManager
             services.AddMvc();
             services.AddSpaStaticFiles( configuration =>
             {
-                configuration.RootPath = "WebClient/build";
+                configuration.RootPath = "webclient/build";
             });
         }
 
@@ -74,7 +74,7 @@ namespace AppManager
 
             app.UseSpa( spa =>
             {
-                spa.Options.SourcePath = "WebClient";
+                spa.Options.SourcePath = "webclient";
                 if ( env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");

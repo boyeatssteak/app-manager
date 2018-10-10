@@ -80,9 +80,6 @@ An area of a application that has unique access permissions compared to the main
 ### Other
 Comments/Notes, Vendors, Users
 
-## Security
-Initially intended to just support basic LDAP authorization
-
 ## Future Features
  - New applications created with a specific platform would inherit relevant secure areas, authentication methods, documentation, and auto-create appropriate default secure areas (SharePoint Central Admin, WordPRess Dahsboard) with app owner as secure area owner
  - Audit log and/or versioning
@@ -91,3 +88,4 @@ Initially intended to just support basic LDAP authorization
  - Reports such as server vs instance environment conflicts, recommended decoms, etc
  - Digital approval of system access requests
  - Track popular clicks in order to have homepage surface likely servers/apps/instances that users may be looking for
+ - Add security, maybe initially just support basic LDAP authorization

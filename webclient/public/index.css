@@ -1,0 +1,32 @@
+body {
+  background: #e6e6e6;
+}
+header {
+  margin: 100px 0px;
+}
+nav {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+}
+h1 {
+  font-size: 5em;
+  font-weight: 100;
+}
+h3 {
+  font-weight: 100;
+}
+h3 span {
+  font-weight: 600;
+}
+input {
+  display: inline-block !important;
+  width: 80% !important;
+}
+button {
+  margin-left: 8px;
+  margin-top: -8px;
+}
+.gitHubAvatar {
+  max-width: 200px;
+  max-height: 200px;
+}
