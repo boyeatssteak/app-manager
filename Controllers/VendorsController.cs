@@ -14,57 +14,57 @@ using AppManager.Models;
 namespace AppManager.Controllers
 {
     [Route("api/[controller]")]
-    public class ServersController : Controller
+    public class VendorsController : Controller
     {
         private readonly AppManagerContext _context;
 
-        public ServersController(AppManagerContext context)
+        public VendorsController(AppManagerContext context)
         {
             _context = context;
         }
 
-        // GET api/servers
+        // GET api/vendors
         // [HttpGet, Authorize]
         [HttpGet]
-        public IEnumerable<Server> GetServers()
+        public IEnumerable<Vendor> GetVendors()
         {
-            return _context.Servers;
+            return _context.Vendors;
         }
 
-        // GET api/servers/3
+        // GET api/vendors/3
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer([FromRoute] int id)
+        public async Task<IActionResult> GetVendor([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
+            var vendor = await _context.Vendors.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (server == null)
+            if (vendor == null)
             {
                 return NotFound();
             }
 
-            return Ok(server);
+            return Ok(vendor);
         }
 
-        // PUT api/servers/3
+        // PUT api/vendors/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServer([FromRoute] int id, [FromBody] Server server)
+        public async Task<IActionResult> PutVendor([FromRoute] int id, [FromBody] Vendor vendor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != server.Id)
+            if (id != vendor.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(server).State = EntityState.Modified;
+            _context.Entry(vendor).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +72,7 @@ namespace AppManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServerExists(id))
+                if (!VendorExists(id))
                 {
                     return NotFound();
                 }
@@ -85,54 +85,54 @@ namespace AppManager.Controllers
             return NoContent();
         }
 
-        // POST api/servers
+        // POST api/vendors
         [HttpPost]
-        public async Task<IActionResult> PostServer([FromBody] Server server)
+        public async Task<IActionResult> PostVendor([FromBody] Vendor vendor)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var checkHostname = await _context.Servers.SingleOrDefaultAsync(m => m.Hostname == server.Hostname);
-            if (checkHostname == null)
+            var checkDuplicate = await _context.Vendors.SingleOrDefaultAsync(m => m.Name == vendor.Name);
+            if (checkDuplicate == null)
             {
-                _context.Servers.Add(server);
+                _context.Vendors.Add(vendor);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetServer", new Server { Id = server.Id }, server);
+                return CreatedAtAction("GetVendor", new Vendor { Id = vendor.Id }, vendor);
             }
             else
             {
-                // Duplicate servername - return an HTTP 409 conflict error
+                // Duplicate vendorname - return an HTTP 409 conflict error
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
         }
 
-        // DELETE api/servers/3
+        // DELETE api/vendors/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServer([FromRoute] int id)
+        public async Task<IActionResult> DeleteVendor([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
-            if (server ==  null)
+            var vendor = await _context.Vendors.SingleOrDefaultAsync(m => m.Id == id);
+            if (vendor ==  null)
             {
                 return NotFound();
             }
 
-            _context.Servers.Remove(server);
+            _context.Vendors.Remove(vendor);
             await _context.SaveChangesAsync();
 
-            return Ok(server);
+            return Ok(vendor);
         }
 
-        private bool ServerExists(int id)
+        private bool VendorExists(int id)
         {
-            return _context.Servers.Any(e => e.Id == id);
+            return _context.Vendors.Any(e => e.Id == id);
         }
     }
 }

@@ -14,57 +14,57 @@ using AppManager.Models;
 namespace AppManager.Controllers
 {
     [Route("api/[controller]")]
-    public class ServersController : Controller
+    public class PlatformsController : Controller
     {
         private readonly AppManagerContext _context;
 
-        public ServersController(AppManagerContext context)
+        public PlatformsController(AppManagerContext context)
         {
             _context = context;
         }
 
-        // GET api/servers
+        // GET api/platforms
         // [HttpGet, Authorize]
         [HttpGet]
-        public IEnumerable<Server> GetServers()
+        public IEnumerable<Platform> GetPlatforms()
         {
-            return _context.Servers;
+            return _context.Platforms;
         }
 
-        // GET api/servers/3
+        // GET api/platforms/3
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer([FromRoute] int id)
+        public async Task<IActionResult> GetPlatform([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
+            var platform = await _context.Platforms.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (server == null)
+            if (platform == null)
             {
                 return NotFound();
             }
 
-            return Ok(server);
+            return Ok(platform);
         }
 
-        // PUT api/servers/3
+        // PUT api/platforms/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServer([FromRoute] int id, [FromBody] Server server)
+        public async Task<IActionResult> PutPlatform([FromRoute] int id, [FromBody] Platform platform)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != server.Id)
+            if (id != platform.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(server).State = EntityState.Modified;
+            _context.Entry(platform).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +72,7 @@ namespace AppManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServerExists(id))
+                if (!PlatformExists(id))
                 {
                     return NotFound();
                 }
@@ -85,54 +85,54 @@ namespace AppManager.Controllers
             return NoContent();
         }
 
-        // POST api/servers
+        // POST api/platforms
         [HttpPost]
-        public async Task<IActionResult> PostServer([FromBody] Server server)
+        public async Task<IActionResult> PostPlatform([FromBody] Platform platform)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var checkHostname = await _context.Servers.SingleOrDefaultAsync(m => m.Hostname == server.Hostname);
-            if (checkHostname == null)
+            var checkDuplicate = await _context.Platforms.SingleOrDefaultAsync(m => m.Name == platform.Name);
+            if (checkDuplicate == null)
             {
-                _context.Servers.Add(server);
+                _context.Platforms.Add(platform);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetServer", new Server { Id = server.Id }, server);
+                return CreatedAtAction("GetPlatform", new Platform { Id = platform.Id }, platform);
             }
             else
             {
-                // Duplicate servername - return an HTTP 409 conflict error
+                // Duplicate platformname - return an HTTP 409 conflict error
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
         }
 
-        // DELETE api/servers/3
+        // DELETE api/platforms/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServer([FromRoute] int id)
+        public async Task<IActionResult> DeletePlatform([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
-            if (server ==  null)
+            var platform = await _context.Platforms.SingleOrDefaultAsync(m => m.Id == id);
+            if (platform ==  null)
             {
                 return NotFound();
             }
 
-            _context.Servers.Remove(server);
+            _context.Platforms.Remove(platform);
             await _context.SaveChangesAsync();
 
-            return Ok(server);
+            return Ok(platform);
         }
 
-        private bool ServerExists(int id)
+        private bool PlatformExists(int id)
         {
-            return _context.Servers.Any(e => e.Id == id);
+            return _context.Platforms.Any(e => e.Id == id);
         }
     }
 }

@@ -4,14 +4,16 @@ using AppManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace appmanager.Migrations
 {
     [DbContext(typeof(AppManagerContext))]
-    partial class AppManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20181011005045_ExpandedDataModels")]
+    partial class ExpandedDataModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,6 +41,8 @@ namespace appmanager.Migrations
 
                     b.Property<string>("Status");
 
+                    b.Property<string>("Url");
+
                     b.HasKey("Id");
 
                     b.ToTable("Applications");
@@ -50,8 +54,6 @@ namespace appmanager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AdminUrl");
-
                     b.Property<int>("AppId");
 
                     b.Property<int?>("ApplicationId");
@@ -61,8 +63,6 @@ namespace appmanager.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("Status");
-
-                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
@@ -148,15 +148,13 @@ namespace appmanager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Domain");
+                    b.Property<string>("Environment");
 
                     b.Property<string>("Hostname");
 
                     b.Property<string>("IpAddress");
 
                     b.Property<string>("OpSystem");
-
-                    b.Property<string>("Role");
 
                     b.Property<string>("Status");
 
@@ -170,8 +168,6 @@ namespace appmanager.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Department");
 
                     b.Property<string>("Email");
 

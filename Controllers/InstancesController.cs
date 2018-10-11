@@ -14,57 +14,57 @@ using AppManager.Models;
 namespace AppManager.Controllers
 {
     [Route("api/[controller]")]
-    public class ServersController : Controller
+    public class InstancesController : Controller
     {
         private readonly AppManagerContext _context;
 
-        public ServersController(AppManagerContext context)
+        public InstancesController(AppManagerContext context)
         {
             _context = context;
         }
 
-        // GET api/servers
+        // GET api/instances
         // [HttpGet, Authorize]
         [HttpGet]
-        public IEnumerable<Server> GetServers()
+        public IEnumerable<Instance> GetInstances()
         {
-            return _context.Servers;
+            return _context.Instances;
         }
 
-        // GET api/servers/3
+        // GET api/instances/3
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer([FromRoute] int id)
+        public async Task<IActionResult> GetInstance([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
+            var instance = await _context.Instances.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (server == null)
+            if (instance == null)
             {
                 return NotFound();
             }
 
-            return Ok(server);
+            return Ok(instance);
         }
 
-        // PUT api/servers/3
+        // PUT api/instances/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServer([FromRoute] int id, [FromBody] Server server)
+        public async Task<IActionResult> PutInstance([FromRoute] int id, [FromBody] Instance instance)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != server.Id)
+            if (id != instance.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(server).State = EntityState.Modified;
+            _context.Entry(instance).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +72,7 @@ namespace AppManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServerExists(id))
+                if (!InstanceExists(id))
                 {
                     return NotFound();
                 }
@@ -85,54 +85,54 @@ namespace AppManager.Controllers
             return NoContent();
         }
 
-        // POST api/servers
+        // POST api/instances
         [HttpPost]
-        public async Task<IActionResult> PostServer([FromBody] Server server)
+        public async Task<IActionResult> PostInstance([FromBody] Instance instance)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var checkHostname = await _context.Servers.SingleOrDefaultAsync(m => m.Hostname == server.Hostname);
-            if (checkHostname == null)
+            var checkDuplicate = await _context.Instances.SingleOrDefaultAsync(m => m.Url == instance.Url);
+            if (checkDuplicate == null)
             {
-                _context.Servers.Add(server);
+                _context.Instances.Add(instance);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetServer", new Server { Id = server.Id }, server);
+                return CreatedAtAction("GetInstance", new Instance { Id = instance.Id }, instance);
             }
             else
             {
-                // Duplicate servername - return an HTTP 409 conflict error
+                // Duplicate instancename - return an HTTP 409 conflict error
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
         }
 
-        // DELETE api/servers/3
+        // DELETE api/instances/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServer([FromRoute] int id)
+        public async Task<IActionResult> DeleteInstance([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
-            if (server ==  null)
+            var instance = await _context.Instances.SingleOrDefaultAsync(m => m.Id == id);
+            if (instance ==  null)
             {
                 return NotFound();
             }
 
-            _context.Servers.Remove(server);
+            _context.Instances.Remove(instance);
             await _context.SaveChangesAsync();
 
-            return Ok(server);
+            return Ok(instance);
         }
 
-        private bool ServerExists(int id)
+        private bool InstanceExists(int id)
         {
-            return _context.Servers.Any(e => e.Id == id);
+            return _context.Instances.Any(e => e.Id == id);
         }
     }
 }

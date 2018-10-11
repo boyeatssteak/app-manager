@@ -14,57 +14,57 @@ using AppManager.Models;
 namespace AppManager.Controllers
 {
     [Route("api/[controller]")]
-    public class ServersController : Controller
+    public class ApplicationsController : Controller
     {
         private readonly AppManagerContext _context;
 
-        public ServersController(AppManagerContext context)
+        public ApplicationsController(AppManagerContext context)
         {
             _context = context;
         }
 
-        // GET api/servers
+        // GET api/applications
         // [HttpGet, Authorize]
         [HttpGet]
-        public IEnumerable<Server> GetServers()
+        public IEnumerable<Application> GetApplications()
         {
-            return _context.Servers;
+            return _context.Applications;
         }
 
-        // GET api/servers/3
+        // GET api/applications/3
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer([FromRoute] int id)
+        public async Task<IActionResult> GetApplication([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
+            var application = await _context.Applications.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (server == null)
+            if (application == null)
             {
                 return NotFound();
             }
 
-            return Ok(server);
+            return Ok(application);
         }
 
-        // PUT api/servers/3
+        // PUT api/applications/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServer([FromRoute] int id, [FromBody] Server server)
+        public async Task<IActionResult> PutApplication([FromRoute] int id, [FromBody] Application application)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != server.Id)
+            if (id != application.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(server).State = EntityState.Modified;
+            _context.Entry(application).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +72,7 @@ namespace AppManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServerExists(id))
+                if (!ApplicationExists(id))
                 {
                     return NotFound();
                 }
@@ -85,54 +85,54 @@ namespace AppManager.Controllers
             return NoContent();
         }
 
-        // POST api/servers
+        // POST api/applications
         [HttpPost]
-        public async Task<IActionResult> PostServer([FromBody] Server server)
+        public async Task<IActionResult> PostApplication([FromBody] Application application)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var checkHostname = await _context.Servers.SingleOrDefaultAsync(m => m.Hostname == server.Hostname);
-            if (checkHostname == null)
+            var checkDuplicate = await _context.Applications.SingleOrDefaultAsync(m => m.Name == application.Name);
+            if (checkDuplicate == null)
             {
-                _context.Servers.Add(server);
+                _context.Applications.Add(application);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetServer", new Server { Id = server.Id }, server);
+                return CreatedAtAction("GetApplication", new Application { Id = application.Id }, application);
             }
             else
             {
-                // Duplicate servername - return an HTTP 409 conflict error
+                // Duplicate applicationname - return an HTTP 409 conflict error
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
         }
 
-        // DELETE api/servers/3
+        // DELETE api/applications/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServer([FromRoute] int id)
+        public async Task<IActionResult> DeleteApplication([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
-            if (server ==  null)
+            var application = await _context.Applications.SingleOrDefaultAsync(m => m.Id == id);
+            if (application ==  null)
             {
                 return NotFound();
             }
 
-            _context.Servers.Remove(server);
+            _context.Applications.Remove(application);
             await _context.SaveChangesAsync();
 
-            return Ok(server);
+            return Ok(application);
         }
 
-        private bool ServerExists(int id)
+        private bool ApplicationExists(int id)
         {
-            return _context.Servers.Any(e => e.Id == id);
+            return _context.Applications.Any(e => e.Id == id);
         }
     }
 }

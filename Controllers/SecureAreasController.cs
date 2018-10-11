@@ -14,57 +14,57 @@ using AppManager.Models;
 namespace AppManager.Controllers
 {
     [Route("api/[controller]")]
-    public class ServersController : Controller
+    public class SecureAreasController : Controller
     {
         private readonly AppManagerContext _context;
 
-        public ServersController(AppManagerContext context)
+        public SecureAreasController(AppManagerContext context)
         {
             _context = context;
         }
 
-        // GET api/servers
+        // GET api/secureareas
         // [HttpGet, Authorize]
         [HttpGet]
-        public IEnumerable<Server> GetServers()
+        public IEnumerable<SecureArea> GetSecureAreas()
         {
-            return _context.Servers;
+            return _context.SecureAreas;
         }
 
-        // GET api/servers/3
+        // GET api/secureareas/3
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer([FromRoute] int id)
+        public async Task<IActionResult> GetSecureArea([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
+            var securearea = await _context.SecureAreas.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (server == null)
+            if (securearea == null)
             {
                 return NotFound();
             }
 
-            return Ok(server);
+            return Ok(securearea);
         }
 
-        // PUT api/servers/3
+        // PUT api/secureareas/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServer([FromRoute] int id, [FromBody] Server server)
+        public async Task<IActionResult> PutSecureArea([FromRoute] int id, [FromBody] SecureArea securearea)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != server.Id)
+            if (id != securearea.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(server).State = EntityState.Modified;
+            _context.Entry(securearea).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +72,7 @@ namespace AppManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServerExists(id))
+                if (!SecureAreaExists(id))
                 {
                     return NotFound();
                 }
@@ -85,54 +85,54 @@ namespace AppManager.Controllers
             return NoContent();
         }
 
-        // POST api/servers
+        // POST api/secureareas
         [HttpPost]
-        public async Task<IActionResult> PostServer([FromBody] Server server)
+        public async Task<IActionResult> PostSecureArea([FromBody] SecureArea securearea)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var checkHostname = await _context.Servers.SingleOrDefaultAsync(m => m.Hostname == server.Hostname);
-            if (checkHostname == null)
+            var checkDuplicate = await _context.SecureAreas.SingleOrDefaultAsync(m => m.Url == securearea.Url);
+            if (checkDuplicate == null)
             {
-                _context.Servers.Add(server);
+                _context.SecureAreas.Add(securearea);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetServer", new Server { Id = server.Id }, server);
+                return CreatedAtAction("GetSecureArea", new SecureArea { Id = securearea.Id }, securearea);
             }
             else
             {
-                // Duplicate servername - return an HTTP 409 conflict error
+                // Duplicate secureareaname - return an HTTP 409 conflict error
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
         }
 
-        // DELETE api/servers/3
+        // DELETE api/secureareas/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServer([FromRoute] int id)
+        public async Task<IActionResult> DeleteSecureArea([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
-            if (server ==  null)
+            var securearea = await _context.SecureAreas.SingleOrDefaultAsync(m => m.Id == id);
+            if (securearea ==  null)
             {
                 return NotFound();
             }
 
-            _context.Servers.Remove(server);
+            _context.SecureAreas.Remove(securearea);
             await _context.SaveChangesAsync();
 
-            return Ok(server);
+            return Ok(securearea);
         }
 
-        private bool ServerExists(int id)
+        private bool SecureAreaExists(int id)
         {
-            return _context.Servers.Any(e => e.Id == id);
+            return _context.SecureAreas.Any(e => e.Id == id);
         }
     }
 }

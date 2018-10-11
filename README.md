@@ -76,6 +76,7 @@ An area of a application that has unique access permissions compared to the main
  - Description
  - URL
  - Secure Owner
+ - **Application**
 
 ### Other
 Comments/Notes, Vendors, Users

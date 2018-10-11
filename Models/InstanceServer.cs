@@ -6,9 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AppManager.Models
 {
-  public class Server
-  {
+  public class InstanceServer
+  { 
+    [Key]
     public int Id { get; set; }
-    public string Hostname { get; set; }
+    public int InstanceId { get; set; }
+    public int ServerId { get; set; }
+    
+    public Instance Instance { get; set; }
+    public Server Server { get; set; }
   }
 }

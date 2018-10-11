@@ -17,6 +17,12 @@ namespace AppManager.Data
     {
     }
 
+    public DbSet<Application> Applications { get; set; }
+    public DbSet<Instance> Instances { get; set; }
+    public DbSet<Platform> Platforms { get; set; }
+    public DbSet<SecureArea> SecureAreas { get; set; }
     public DbSet<Server> Servers { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Vendor> Vendors { get; set; }
   }
 }
