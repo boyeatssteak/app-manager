@@ -24,5 +24,6 @@ namespace AppManager.Data
     public DbSet<Server> Servers { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
+    public DbSet<InstanceServer> InstanceServers { get; set; }
   }
 }

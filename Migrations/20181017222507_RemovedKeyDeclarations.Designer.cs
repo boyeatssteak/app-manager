@@ -4,14 +4,16 @@ using AppManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace appmanager.Migrations
 {
     [DbContext(typeof(AppManagerContext))]
-    partial class AppManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20181017222507_RemovedKeyDeclarations")]
+    partial class RemovedKeyDeclarations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

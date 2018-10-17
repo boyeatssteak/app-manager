@@ -8,7 +8,6 @@ namespace AppManager.Models
 {
   public class InstanceServer
   { 
-    [Key]
     public int Id { get; set; }
     public int InstanceId { get; set; }
     public int ServerId { get; set; }

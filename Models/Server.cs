@@ -8,7 +8,6 @@ namespace AppManager.Models
 {
   public class Server
   {
-    [Key]
     public int Id { get; set; }
     public string Hostname { get; set; }
     public string IpAddress { get; set; }

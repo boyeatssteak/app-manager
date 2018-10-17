@@ -8,14 +8,12 @@ namespace AppManager.Models
 {
   public class Instance
   {
-    [Key]
     public int Id { get; set; }
     public string Name { get; set; }
     public int AppId { get; set; }
     public string Environment { get; set; }
     public string Status { get; set; }
     public string Url { get; set; }
-    public string AdminUrl { get; set; }
 
     public virtual ICollection<InstanceServer> InstanceServers { get; set; }
     public virtual Application Application { get; set; }
