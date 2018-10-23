@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider, connect } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 
 // components
 import Header from './components/Header';
@@ -12,25 +12,7 @@ import Applications from './screens/Applications';
 import Platforms from './screens/Platforms';
 import Search from './screens/Search';
 
-let initState = {
-  stuff: 'No?'
-}
-
-function reducer (state = initState, { type, payload }) {
-  switch (type) {
-    default:
-      console.log("case default");
-      return state;
-  }
-}
-
-const store = createStore(
-  reducer,
-  {
-    stuff: 'Yes?'
-  },
-  window.devToolsExtension && window.devToolsExtension()
-);
+const store = configureStore();
 
 const Index = ({ store }) => (
   <Router>
