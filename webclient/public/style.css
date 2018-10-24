@@ -1,12 +1,12 @@
 body {
   background: #e6e6e6;
 }
-header {
-  margin: 100px 0px;
-}
 nav {
   border-bottom: 1px solid #ccc;
   margin-bottom: 50px;
+}
+.container {
+  margin-top: 100px;
 }
 h1 {
   font-size: 5em;
