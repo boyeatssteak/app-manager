@@ -61,7 +61,8 @@ namespace AppManager.Models
                 var applications = new Application[]
                 {
                     new Application { Name = "Company Website", Repo = "https://github.com/username/companywebsite", Access = "Public", PlatformId = platforms.Single(p => p.Name == "WordPress").Id, Status = "Development", OwnerId = users.Single(u => u.Name == "John Doe").Id, Description = "Public face of the company" },
-                    new Application { Name = "Company SharePoint", Access = "AD Authenticated Users", PlatformId = platforms.Single(p => p.Name == "SharePoint 2019").Id, Status = "Live", OwnerId = users.Single(u => u.Name == "Jane Smith").Id, Description = "Resource for employees to find company documents"}
+                    new Application { Name = "Company SharePoint", Access = "AD Authenticated Users", PlatformId = platforms.Single(p => p.Name == "SharePoint 2019").Id, Status = "Live", OwnerId = users.Single(u => u.Name == "Jane Smith").Id, Description = "Resource for employees to find company documents"},
+                    new Application { Name = "Project Website", Repo = "https://github.com/username/projectwebsite", Access = "Public", PlatformId = platforms.Single(p => p.Name == "WordPress").Id, Status = "Produciton", OwnerId = users.Single(u => u.Name == "Jane Smith").Id, Description = "Project website to feature special stuff" }
                 };
                 foreach (Application a in applications)
                 {
@@ -74,7 +75,9 @@ namespace AppManager.Models
                     new Instance { Name = "Company Website - Dev", AppId = applications.Single(a => a.Name == "Company Website").Id, Environment = "Dev", Status = "Live", Url = "http://devwebsite.company.com/" },
                     new Instance { Name = "Company Website - Prod", AppId = applications.Single(a => a.Name == "Company Website").Id, Environment = "Prod", Status = "Planned", Url = "https://company.com" },
                     new Instance { Name = "Company Website - Test", AppId = applications.Single(a => a.Name == "Company Website").Id, Environment = "Test", Status = "Live", Url = "http://testwebsite.company.com/" },
-                    new Instance { Name = "Primary Farm", AppId = applications.Single(a => a.Name == "Company SharePoint").Id, Environment = "Prod", Status = "Live", Url = "https://sharepoint.company.com" }
+                    new Instance { Name = "Primary Farm", AppId = applications.Single(a => a.Name == "Company SharePoint").Id, Environment = "Prod", Status = "Live", Url = "https://sharepoint.company.com" },
+                    new Instance { Name = "Project Website - Prod", AppId = applications.Single(a => a.Name == "Project Website").Id, Environment = "Prod", Status = "Live", Url = "https://project.company.com" },
+                    new Instance { Name = "Project Website - Dev", AppId = applications.Single(a => a.Name == "Project Website").Id, Environment = "Dev", Status = "Live", Url = "https://devproject.company.com" }
                 };
                 foreach (Instance i in instances)
                 {
@@ -105,7 +108,9 @@ namespace AppManager.Models
                     new InstanceServer { InstanceId = instances.Single(i => i.Name == "Company Website - Test").Id, ServerId = servers.Single(s => s.Hostname == "server-testweb").Id },
                     new InstanceServer { InstanceId = instances.Single(i => i.Name == "Primary Farm").Id, ServerId = servers.Single(s => s.Hostname == "server-spsql").Id },
                     new InstanceServer { InstanceId = instances.Single(i => i.Name == "Primary Farm").Id, ServerId = servers.Single(s => s.Hostname == "server-spapp").Id },
-                    new InstanceServer { InstanceId = instances.Single(i => i.Name == "Primary Farm").Id, ServerId = servers.Single(s => s.Hostname == "server-spfe").Id }
+                    new InstanceServer { InstanceId = instances.Single(i => i.Name == "Primary Farm").Id, ServerId = servers.Single(s => s.Hostname == "server-spfe").Id },
+                    new InstanceServer { InstanceId = instances.Single(i => i.Name == "Project Website - Dev").Id, ServerId = servers.Single(s => s.Hostname == "server-web").Id },
+                    new InstanceServer { InstanceId = instances.Single(i => i.Name == "Project Website - Prod").Id, ServerId = servers.Single(s => s.Hostname == "server-web").Id }
                 };
                 foreach (InstanceServer _is in instanceservers)
                 {
