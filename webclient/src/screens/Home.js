@@ -8,7 +8,7 @@ class Home extends React.Component {
     return (
       <div className="container">
         <PageHeader title="App Manager" />
-        <p>Stuff and nonsense.</p>
+        <p>This is a place to help you figure out what applications are on what servers, or what URL is used to manage ___ app.</p>
       </div>
     );
   }

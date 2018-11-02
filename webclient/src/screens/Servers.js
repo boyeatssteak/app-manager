@@ -1,52 +1,58 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { itemsFetchData } from '../actions/items';
 import PageHeader from '../components/PageHeader';
 
 class Servers extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchData('/api/servers');
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    if (this.props.hasErrored) {
-      return <p>Error'd!</p>;
-    }
-
-    if (this.props.isLoading) {
-      return <p>Loading...</p>;
-    }
-
     return (
       <div className="container">
         <PageHeader title="Servers" />
-        <ul>
-          {this.props.servers.map((server) => (
-            <li key={server.id}>
-              {server.hostname} - {server.ipAddress} ({server.opSystem})
-            </li>
-          ))}
-        </ul>
+        <ServersContent fetchData={this.props.fetchData} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state,
-    servers: state.items,
-    hasErrored: state.itemsHasErrored,
-    isLoading: state.itemsIsLoading
-  };
-};
+class ServersContent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLoaded: false,
+      hasErrored: false
+    }
+  }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: (url) => dispatch(itemsFetchData(url))
-  };
-};
+  async componentDidMount() {
+    this.props.fetchData('/api/servers', this )
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Servers);
+  render() {
+    if (this.state.hasErrored) {
+      return <p>Error'd!</p>;
+    }
+
+    if (this.state.hasLoaded) {
+      return (
+        <div>
+          <ul>
+            {this.state.response.map((server) => (
+              <li key={server.id}>
+                <Link to={"/servers/" + server.id}>{server.hostname}</Link> - {server.ipAddress} ({server.opSystem})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    return <p>Loading...</p>;
+
+  }
+}
+
+export default Servers;

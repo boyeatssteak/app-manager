@@ -1,52 +1,54 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { itemsFetchData } from '../actions/items';
 import PageHeader from '../components/PageHeader';
 
 class Applications extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchData('/api/applications');
-  }
-
   render() {
-    if (this.props.hasErrored) {
-      return <p>Error'd!</p>;
-    }
-
-    if (this.props.isLoading) {
-      return <p>Loading...</p>;
-    }
-
     return (
       <div className="container">
         <PageHeader title="Applications" />
-        <ul>
-          {this.props.apps.map((app) => (
-            <li key={app.id}>
-              {app.name} - {app.status}
-            </li>
-          ))}
-        </ul>
+        <ApplicationsContent fetchData={this.props.fetchData} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state,
-    apps: state.items,
-    hasErrored: state.itemsHasErrored,
-    isLoading: state.itemsIsLoading
-  };
-};
+class ApplicationsContent extends React.Component {
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: (url) => dispatch(itemsFetchData(url))
-  };
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLoaded: false,
+      hasErrored: false
+    }
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Applications);
+  async componentDidMount() {
+    this.props.fetchData('/api/applications', this);
+  }
+
+  render() {
+    if (this.state.hasErrored) {
+      return <p>Error'd!</p>;
+    }
+
+    if (this.state.hasLoaded) {
+      return (
+        <div>
+          <ul>
+            {this.state.response.map((app) => (
+              <li key={app.id}>
+                {app.name} - {app.status}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    return <p>Loading...</p>;
+
+  }
+}
+
+export default Applications;

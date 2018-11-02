@@ -8,6 +8,7 @@ class Platforms extends React.Component {
     return (
       <div className="container">
         <PageHeader title="Platforms" />
+        <p>Oh noes! This isn't finished yet.</p>
       </div>
     )
   }

@@ -1,37 +1,70 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
 
 // components
 import Header from './components/Header';
 import Home from './screens/Home';
 import Servers from './screens/Servers';
+import ServerDetail from './screens/ServerDetail';
 import Applications from './screens/Applications';
 import Platforms from './screens/Platforms';
 import Search from './screens/Search';
 
-const store = configureStore();
+class Index extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLoaded: false,
+      hasErrored: false
+    }
+  }
 
-const Index = ({ store }) => (
-  <Router>
-    <div className="wrap">
-      <Header />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/servers" component={Servers} />
-      <Route exact path="/apps" component={Applications} />
-      <Route exact path="/platforms" component={Platforms} />
-      <Route exact path="/search" component={Search} />
-    </div>
-  </Router>
-);
+  fetchData ( url, that ) {
+    that.setState({ hasLoaded: false });
+    try {
+      fetch( url )
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then(
+        (items) => {
+        that.setState({ 
+          response: items,
+          hasLoaded: true 
+        });
+      })
+    } catch(error) {
+      console.error(error);
+      that.setState({ hasErrored: true })
+    }
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="wrap">
+          <Header />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/servers" render={(props) => <Servers {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/servers/:serverId" render={(props) => <ServerDetail {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/apps" render={(props) => <Applications {...props} fetchData={this.fetchData} /> } />
+          <Route exact path="/platforms" component={Platforms} />
+          <Route exact path="/search" component={Search} />
+        </div>
+      </Router>
+    )
+  }
+
+}
 
 render(
-  <Provider store={store}>
     <div>
       <Index />
-    </div>
-  </Provider>,
+    </div>,
   document.getElementById('root')
 );

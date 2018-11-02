@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import PageHeader from '../components/PageHeader';
 
@@ -8,6 +7,7 @@ class Search extends React.Component {
     return (
       <div className="container">
         <PageHeader title="Search" />
+        <p>Oh noes! This isn't finished yet.</p>
       </div>
     )
   }
