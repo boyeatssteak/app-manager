@@ -1,13 +1,16 @@
 import React from 'react';
 
-import PageHeader from '../components/PageHeader';
+import LargeIcon from '../components/LargeIcon';
 
 class Search extends React.Component {
   render() {
     return (
       <div className="container">
-        <PageHeader title="Search" />
-        <p>Oh noes! This isn't finished yet.</p>
+        <LargeIcon itemType="search" />
+        <section className="am-container am-primary">
+          <h1>Search</h1>
+          <p>Oh noes! This isn't finished yet.</p>
+        </section>
       </div>
     )
   }

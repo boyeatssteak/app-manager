@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
 import LargeIcon from '../components/LargeIcon';
 
-class Applications extends React.Component {
+class Instances extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       hasLoaded: false,
       hasErrored: false,
-      itemType: "app",
-      itemDisplayName: "Applications"
+      itemType: "instance",
+      itemDisplayName: "Instances"
     }
   }
 
   async componentDidMount() {
-    this.props.fetchData('/api/applications', this);
+    this.props.fetchData('/api/instances', this);
   }
 
   render() {
@@ -35,16 +35,14 @@ class Applications extends React.Component {
               <thead>
                 <tr>
                   <th className="am-name">Name</th>
-                  <th className="am-repo">Repo</th>
                   <th className="am-status">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.response.map((app) => (
-                  <tr key={app.id}>
-                    <td className="am-cell am-name am-primaryName"><Link className="am-app" to={"/applications/" + app.id}>{app.name}</Link></td>
-                    <td className="am-cell am-repo">{app.repo}</td>
-                    <td className="am-cell am-status">{app.status}</td>
+                {this.state.response.map((instance) => (
+                  <tr key={instance.id}>
+                    <td className="am-cell am-name am-primaryName"><Link className="am-instance" to={"/instances/" + instance.id}>{instance.name}</Link></td>
+                    <td className="am-cell am-status">{instance.status}</td>
                   </tr>
                 ))}
               </tbody>
@@ -59,4 +57,4 @@ class Applications extends React.Component {
   }
 }
 
-export default Applications;
+export default Instances;

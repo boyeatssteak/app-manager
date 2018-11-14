@@ -1,29 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import PageHeader from '../components/PageHeader';
+import Loading from '../components/Loading';
+import LargeIcon from '../components/LargeIcon';
 
 class Servers extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <PageHeader title="Servers" />
-        <ServersContent fetchData={this.props.fetchData} />
-      </div>
-    )
-  }
-}
-
-class ServersContent extends React.Component {
-  constructor(props) {
-    super(props);
     this.state = {
       hasLoaded: false,
-      hasErrored: false
+      hasErrored: false,
+      itemType: "server",
+      itemDisplayName: "Servers"
     }
   }
 
@@ -38,19 +26,40 @@ class ServersContent extends React.Component {
 
     if (this.state.hasLoaded) {
       return (
-        <div>
-          <ul>
-            {this.state.response.map((server) => (
-              <li key={server.id}>
-                <Link to={"/servers/" + server.id}>{server.hostname}</Link> - {server.ipAddress} ({server.opSystem})
-              </li>
-            ))}
-          </ul>
+        <div className={"container am-" + this.state.itemType}>
+          <LargeIcon itemType={this.state.itemType} />
+          <section className="am-container am-primary">
+            <h1 className={"am-" + this.state.itemType}>{this.state.itemDisplayName}</h1>
+            <table className={"am-table am-" + this.state.itemType}>
+              <thead>
+                <tr>
+                  <th className="am-hostname">Hostname</th>
+                  <th className="am-domain">Domain</th>
+                  <th className="am-ipAddress">IP Address</th>
+                  <th className="am-opSystem">OS</th>
+                  <th className="am-role">Role</th>
+                  <th className="am-status">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.response.map((server) => (
+                  <tr key={server.id}>
+                    <td className="am-cell am-hostname am-primaryName"><Link className="am-server" to={"/servers/" + server.id}>{server.hostname}</Link></td>
+                    <td className="am-cell am-domain">{server.domain}</td>
+                    <td className="am-cell am-ipAddress">{server.ipAddress}</td>
+                    <td className="am-cell am-opSystem">{server.opSystem}</td>
+                    <td className="am-cell am-role">{server.role}</td>
+                    <td className="am-cell am-status">{server.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         </div>
       )
     }
 
-    return <p>Loading...</p>;
+    return <Loading loadingItem={this.state.itemDisplayName} />;
 
   }
 }

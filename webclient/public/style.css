@@ -1,3 +1,23 @@
+/*
+:root {
+  --nanaBlue: #3a7bc8;
+  --textGrey: #777;
+}
+
+color: var(--nanaBlue);
+*/
+
+:root {
+  --app: #235942;
+  --instance: #60177a; --instanceLight: #dfd1e4;
+  --platform: #4a1e0b; --platformLight: #dbd2ce;
+  --secure: #dc0d08;
+  --server: #076cd8;
+  --user: #333685;
+  --vendor: #f1722f;
+  --text: #333; --textLight: #999; --textDark: #555;
+}
+
 body {
   background: #e6e6e6;
 }
@@ -8,15 +28,29 @@ nav {
 .container {
   margin-top: 100px;
 }
-h1 {
-  font-size: 5em;
+.am-container h1 {
+  font-size: 4em;
   font-weight: 100;
+  line-height: 1;
+  position: relative;
+  top: -3px;
 }
-h3 {
+.am-container h2 {
+  font-size: 54px;
   font-weight: 100;
+  line-height: 52px;
 }
-h3 span {
+.am-container h2 span {
   font-weight: 600;
+  color: var(--textLight);
+}
+.am-primary h3 {
+  font-weight: 700;
+  color: var(--textDark);
+  text-transform: uppercase;
+  font-size: 21px;
+  margin-bottom: 0px;
+  line-height: 17px;
 }
 input {
   display: inline-block !important;
@@ -26,7 +60,155 @@ button {
   margin-left: 8px;
   margin-top: -8px;
 }
-.gitHubAvatar {
-  max-width: 200px;
-  max-height: 200px;
+.am-flexContainer {
+  display: flex;
+}
+.am-icon {
+  flex: 1;
+}
+.am-primaryItemContent {
+  flex: 3;
+}
+
+/* .am-server .am-icon {
+  color: var(--server);
+} */
+
+/* design v2 */
+/* .am-largeIcon {
+  height: 70px;
+  width: 70px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
+  border-left: 0px solid;
+}
+.am-container {
+  margin-left: 70px;
+  margin-top: -70px;
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+  padding: 20px;
+  border-left: 22px solid;
+}
+.instance .am-container {
+  background: var(--instanceLight);
+  border-left-color: var(--instance);
+}
+.platform .am-container {
+  background: var(--platformLight);
+  border-left-color: var(--platform);
+}
+.am-largeIcon i {
+  display: block;
+  font-size: 35px;
+  text-align: center;
+  color: #fff;
+  padding-top: 16px;
+  padding-left: 15px;
+} */
+
+/* design v3 */
+.am-container {
+  margin-left: 105px;
+  padding: 0 7px;
+}
+.am-container.am-primary {
+  margin-top: -70px;
+}
+
+.am-smallIcon i,
+.am-largeIcon i {
+  display: block;
+  text-align: center;
+  color: #fff;
+}
+.am-smallIcon {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
+.am-smallIcon i {
+  font-size: 22px;
+  padding-top: 13px;
+}
+.am-largeIcon {
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+}
+.am-largeIcon i {
+  font-size: 35px;
+  padding-top: 18px;
+}
+/* .instance {
+  color: var(--instance);
+} */
+
+.am-smallIcon.am-app, .am-largeIcon.am-app, a.am-app::before { background: var(--app); }
+.am-smallIcon.am-instance, .am-largeIcon.am-instance, a.am-instance::before { background: var(--instance); }
+.am-smallIcon.am-platform, .am-largeIcon.am-platform, a.am-platform::before { background: var(--platform); }
+.am-smallIcon.am-secure, .am-largeIcon.am-secure, a.am-secure::before { background: var(--secure); }
+.am-smallIcon.am-server, .am-largeIcon.am-server, a.am-server::before { background-color: var(--server); }
+.am-smallIcon.am-user, .am-largeIcon.am-user, a.am-user::before { background-color: var(--user); }
+.am-smallIcon.am-vendor, .am-largeIcon.am-vendor, a.am-vendor::before { background-color: var(--vendor); }
+h1.am-app, h2.am-app, h3.am-app { color: var(--app); }
+h1.am-instance, h2.am-instance, h3.am-instance { color: var(--instance); }
+h1.am-platform, h2.am-platform, h3.am-platform { color: var(--platform); }
+h1.am-secure, h2.am-secure, h3.am-secure { color: var(--secure); }
+h1.am-server, h2.am-server, h3.am-server { color: var(--server); }
+h1.am-user, h2.am-user, h3.am-user { color: var(--user); }
+h1.am-vendor, h2.am-vendor, h3.am-vendor { color: var(--vendor); }
+
+.am-table {
+  width: 100%;
+}
+.am-cell {
+  /* background: red; */
+}
+.am-primaryName {
+  font-weight: 600;
+}
+.am-table a.am-app::before,
+.am-table a.am-instance::before,
+.am-table a.am-platform::before,
+.am-table a.am-secure::before,
+.am-table a.am-server::before,
+.am-table a.am-user::before,
+.am-table a.am-vendor::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  margin-right: 4px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+
+.am-details {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.am-details div {
+  font-size: 22px;
+  font-weight: 600;
+}
+.am-detailTitle {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 200;
+}
+.am-related {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid var(--textLight);
+}
+.am-related h3 {
+  text-transform: none;
+  font-weight: 200;
+  font-size: 37px;
+  padding-bottom: 14px;
+  margin-left: 70px;
+  margin-top: -50px;
 }

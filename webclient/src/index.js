@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // components
 import Header from './components/Header';
-import Home from './screens/Home';
-import Servers from './screens/Servers';
-import ServerDetail from './screens/ServerDetail';
 import Applications from './screens/Applications';
+import Home from './screens/Home';
+import Instances from './screens/Instances';
 import Platforms from './screens/Platforms';
 import Search from './screens/Search';
+import Servers from './screens/Servers';
+import ServerDetail from './screens/ServerDetail';
 
 class Index extends React.Component {
   constructor(props) {
@@ -50,10 +51,11 @@ class Index extends React.Component {
         <div className="wrap">
           <Header />
           <Route exact path="/" component={Home} />
+          <Route exact path="/apps" render={(props) => <Applications {...props} fetchData={this.fetchData} /> } />
+          <Route exact path="/instances" render={(props) => <Instances {...props} fetchData={this.fetchData} /> } />
           <Route exact path="/servers" render={(props) => <Servers {...props} fetchData={this.fetchData} />} />
           <Route exact path="/servers/:serverId" render={(props) => <ServerDetail {...props} fetchData={this.fetchData} />} />
-          <Route exact path="/apps" render={(props) => <Applications {...props} fetchData={this.fetchData} /> } />
-          <Route exact path="/platforms" component={Platforms} />
+          <Route exact path="/platforms" render={(props) => <Platforms {...props} fetchData={this.fetchData} />} />
           <Route exact path="/search" component={Search} />
         </div>
       </Router>

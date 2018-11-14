@@ -80,6 +80,7 @@ namespace AppManager.Controllers
                         appId = app.Id,
                         appName = app.Name,
                         appStatus = app.Status,
+                        ownerId = user.Id,
                         ownerName = user.Name
                     }
                 };
