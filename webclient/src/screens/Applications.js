@@ -42,7 +42,7 @@ class Applications extends React.Component {
               <tbody>
                 {this.state.response.map((app) => (
                   <tr key={app.id}>
-                    <td className="am-cell am-name am-primaryName"><Link className="am-app" to={"/applications/" + app.id}>{app.name}</Link></td>
+                    <td className="am-cell am-name am-primaryName"><Link className="am-app" to={"/apps/" + app.id}>{app.name}</Link></td>
                     <td className="am-cell am-repo">{app.repo}</td>
                     <td className="am-cell am-status">{app.status}</td>
                   </tr>

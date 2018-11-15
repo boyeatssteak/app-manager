@@ -42,12 +42,72 @@ namespace AppManager.Controllers
 
             var application = await _context.Applications.SingleOrDefaultAsync(m => m.Id == id);
 
+            var query =
+                new
+                {
+                    // application {Id, Name, Description, RepoURL, Platform, PlatformId, Audience(Access), Owner, OwnerId, Status(Green Light)}
+                    application =
+                    from app in _context.Applications
+                    join user in _context.Users on app.OwnerId equals user.Id
+                    join platform in _context.Platforms on app.PlatformId equals platform.Id
+                    where app.Id == application.Id
+                    select new
+                    {
+                        id = app.Id,
+                        name = app.Name,
+                        desc = app.Description,
+                        repo = app.Repo,
+                        audience = app.Access,
+                        status = app.Status,
+                        platformId = app.PlatformId,
+                        platform = platform.Name,
+                        ownerId = app.OwnerId,
+                        owner = user.Name
+                    },
+                    // instances {Id, Env, Url, Notes, {ServerId, hostname, domain, ipAddress}, Status}
+                    instances = 
+                    from instance in _context.Instances
+                    where instance.AppId == application.Id
+                    select new
+                    {
+                        id = instance.Id,
+                        name = instance.Name,
+                        env = instance.Environment,
+                        status = instance.Status,
+                        url = instance.Url,
+                        servers = 
+                        from _is in _context.InstanceServers
+                        join server in _context.Servers on _is.ServerId equals server.Id 
+                        where _is.InstanceId == instance.Id
+                        select new
+                        {
+                            id = server.Id,
+                            hostname = server.Hostname,
+                            domain = server.Domain,
+                            ipAddress = server.IpAddress
+                        }
+                    },
+                    // secure areas {Id, Name, Url, Owner, OwnerId}
+                    secureAreas =
+                    from secArea in _context.SecureAreas
+                    join user in _context.Users on secArea.OwnerId equals user.Id
+                    where secArea.AppId == application.Id
+                    select new
+                    {
+                        id = secArea.Id,
+                        name = secArea.Description,
+                        url = secArea.Url,
+                        ownerId = user.Id,
+                        owner = user.Name
+                    }
+                };
+
             if (application == null)
             {
                 return NotFound();
             }
 
-            return Ok(application);
+            return Ok(query);
         }
 
         // PUT api/applications/3

@@ -44,6 +44,9 @@ nav {
   font-weight: 600;
   color: var(--textLight);
 }
+.am-primary h2 {
+  margin-bottom: 14px;
+}
 .am-primary h3 {
   font-weight: 700;
   color: var(--textDark);
@@ -51,6 +54,10 @@ nav {
   font-size: 21px;
   margin-bottom: 0px;
   line-height: 17px;
+}
+.am-primary p {
+  margin-top: 2px;
+  margin-bottom: 0px;
 }
 input {
   display: inline-block !important;
@@ -70,44 +77,6 @@ button {
   flex: 3;
 }
 
-/* .am-server .am-icon {
-  color: var(--server);
-} */
-
-/* design v2 */
-/* .am-largeIcon {
-  height: 70px;
-  width: 70px;
-  border-top-left-radius: 35px;
-  border-bottom-left-radius: 35px;
-  border-left: 0px solid;
-}
-.am-container {
-  margin-left: 70px;
-  margin-top: -70px;
-  border-top-right-radius: 35px;
-  border-bottom-right-radius: 35px;
-  padding: 20px;
-  border-left: 22px solid;
-}
-.instance .am-container {
-  background: var(--instanceLight);
-  border-left-color: var(--instance);
-}
-.platform .am-container {
-  background: var(--platformLight);
-  border-left-color: var(--platform);
-}
-.am-largeIcon i {
-  display: block;
-  font-size: 35px;
-  text-align: center;
-  color: #fff;
-  padding-top: 16px;
-  padding-left: 15px;
-} */
-
-/* design v3 */
 .am-container {
   margin-left: 105px;
   padding: 0 7px;
@@ -161,9 +130,13 @@ h1.am-vendor, h2.am-vendor, h3.am-vendor { color: var(--vendor); }
 
 .am-table {
   width: 100%;
+  margin-top: 15px;
+}
+.am-table td {
+  margin-top: 3px;
 }
 .am-cell {
-  /* background: red; */
+  vertical-align: top;
 }
 .am-primaryName {
   font-weight: 600;
@@ -185,20 +158,49 @@ h1.am-vendor, h2.am-vendor, h3.am-vendor { color: var(--vendor); }
   top: 2px;
 }
 
-.am-details {
-  margin-top: 30px;
+.am-row {
   display: flex;
   justify-content: space-between;
 }
-.am-details div {
+.am-stack>div {
+  margin-top: 17px;
+}
+.am-stack .am-detailTitle {
+  display: block;
+}
+.am-details {
   font-size: 22px;
   font-weight: 600;
+  margin-top: 15px;
+  line-height: 23px;
 }
 .am-detailTitle {
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 200;
+  padding-right: 7px;
 }
+.am-primary .am-detailTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+.am-details a.am-app::before,
+.am-details a.am-instance::before,
+.am-details a.am-platform::before,
+.am-details a.am-secure::before,
+.am-details a.am-server::before,
+.am-details a.am-user::before,
+.am-details a.am-vendor::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  margin-right: 4px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+}
+
 .am-related {
   margin-top: 30px;
   padding-top: 30px;
@@ -208,7 +210,10 @@ h1.am-vendor, h2.am-vendor, h3.am-vendor { color: var(--vendor); }
   text-transform: none;
   font-weight: 200;
   font-size: 37px;
-  padding-bottom: 14px;
   margin-left: 70px;
   margin-top: -50px;
+}
+
+.am-cell.am-serverNames a {
+  display: block;
 }

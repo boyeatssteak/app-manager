@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // components
 import Header from './components/Header';
 import Applications from './screens/Applications';
+import AppDetail from './screens/AppDetail';
 import Home from './screens/Home';
 import Instances from './screens/Instances';
 import Platforms from './screens/Platforms';
@@ -52,6 +53,7 @@ class Index extends React.Component {
           <Header />
           <Route exact path="/" component={Home} />
           <Route exact path="/apps" render={(props) => <Applications {...props} fetchData={this.fetchData} /> } />
+          <Route exact path="/apps/:appId" render={(props) => <AppDetail {...props} fetchData={this.fetchData} />} />
           <Route exact path="/instances" render={(props) => <Instances {...props} fetchData={this.fetchData} /> } />
           <Route exact path="/servers" render={(props) => <Servers {...props} fetchData={this.fetchData} />} />
           <Route exact path="/servers/:serverId" render={(props) => <ServerDetail {...props} fetchData={this.fetchData} />} />

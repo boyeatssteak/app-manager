@@ -42,24 +42,6 @@ namespace AppManager.Controllers
 
             var server = await _context.Servers.SingleOrDefaultAsync(m => m.Id == id);
 
-            // var query =
-            //     from _is in _context.InstanceServers
-            //     join instance in _context.Instances on _is.InstanceId equals instance.Id
-            //     join app in _context.Applications on instance.AppId equals app.Id
-            //     join user in _context.Users on app.OwnerId equals user.Id
-            //     where _is.ServerId == server.Id
-            //     select new
-            //     {
-            //         server,
-            //         appId = app.Id,
-            //         appName = app.Name,
-            //         appStatus = app.Status,
-            //         ownerName = user.Name,
-            //         instanceId = instance.Id,
-            //         instanceEnv = instance.Environment,
-            //         instanceStatus = instance.Status
-            //     };
-
             var query =
                 new
                 {

@@ -63,7 +63,7 @@ class ServerDetail extends React.Component {
                         <Link className="am-instance" to={"/instances/" + instance.id}>{instance.env}</Link>
                       </td>
                       <td className="am-cell am-appName">
-                        <Link className="am-app" to={"/applications/" + instance.appId}>{instance.appName}</Link>
+                        <Link className="am-app" to={"/apps/" + instance.appId}>{instance.appName}</Link>
                       </td>
                       <td className="am-cell am-url">
                         <a href={instance.url} target="_blank">{instance.url}</a>
