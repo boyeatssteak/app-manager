@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Loading from '../components/Loading';
-import LargeIcon from '../components/LargeIcon';
-import SmallIcon from '../components/SmallIcon'
 import NoDetails from '../components/NoDetails';
+import Heading from '../components/Heading';
 
 class AppDetail extends React.Component {
 
@@ -30,10 +29,8 @@ class AppDetail extends React.Component {
     if (this.state.hasLoaded) {
       return (
         <div className={"container am-" + this.state.itemType}>
-          <LargeIcon itemType={this.state.itemType} />
-          <section className="am-container am-primary">
-            <h3>{this.state.itemDisplayName}</h3>
-            <h2 className={"am-" + this.state.itemType}>{this.state.response.application[0].name}</h2>
+          <Heading headingType="detail" itemType={this.state.itemType} itemDisplayName={this.state.itemDisplayName} title={this.state.response.application[0].name} />
+          <section className="am-container">
             <p>{this.state.response.application[0].desc}</p>
             <p><span className="am-detailTitle">Code Repo:</span><a href={this.state.response.application[0].repo} target="_blank">{this.state.response.application[0].repo}</a></p>
           </section>
@@ -50,8 +47,7 @@ class AppDetail extends React.Component {
             </div>
           </section>
           <section className="am-container am-related am-instance">
-            <SmallIcon itemType="instance" />
-            <h3 className="am-section am-instance">Instances of this Application</h3>
+            <Heading headingType="related" itemType="instance" title="Instances of this Application" />
             <table className="am-table am-instance">
               <thead>
                 <tr>
@@ -84,8 +80,7 @@ class AppDetail extends React.Component {
             </table>
           </section>
           <section className="am-container am-related am-secureArea">
-            <SmallIcon itemType="secure" />
-            <h3 className="am-section am-secure">Secure Areas of this Application</h3>
+            <Heading headingType="related" itemType="secure" title="Secure Areas of this Application" />
             <table className="am-table am-secure">
               <thead>
                 <tr>

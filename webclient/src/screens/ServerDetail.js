@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Loading from '../components/Loading';
-import LargeIcon from '../components/LargeIcon';
-import SmallIcon from '../components/SmallIcon'
+import Heading from '../components/Heading';
 import NoDetails from '../components/NoDetails';
 
 class ServerDetail extends React.Component {
@@ -30,20 +29,17 @@ class ServerDetail extends React.Component {
     if (this.state.hasLoaded) {
       return (
         <div className={"container am-" + this.state.itemType}>
-          <LargeIcon itemType={this.state.itemType} />
-          <section className="am-container am-primary">
-            <h3>{this.state.itemDisplayName}</h3>
-            <h2 className={"am-" + this.state.itemType}>{this.state.response.server.hostname}<span className="am-domain">.{this.state.response.server.domain}</span></h2>
-          </section>
+          <Heading headingType="detail" itemType={this.state.itemType} itemDisplayName={this.state.itemDisplayName} title={this.state.response.server.hostname} domain={this.state.response.server.domain} />
           <section className={"am-container am-details am-" + this.state.itemType}>
-            <div><span className="am-detailTitle">IP Address:</span> {this.state.response.server.ipAddress}</div>
-            <div><span className="am-detailTitle">OS:</span> {this.state.response.server.opSystem}</div>
-            <div><span className="am-detailTitle">Role:</span> {this.state.response.server.role}</div>
-            <div><span className="am-detailTitle">Status:</span> {this.state.response.server.status}</div>
+            <div className="am-row">
+              <div><span className="am-detailTitle">IP Address:</span> {this.state.response.server.ipAddress}</div>
+              <div><span className="am-detailTitle">OS:</span> {this.state.response.server.opSystem}</div>
+              <div><span className="am-detailTitle">Role:</span> {this.state.response.server.role}</div>
+              <div><span className="am-detailTitle">Status:</span> {this.state.response.server.status}</div>
+            </div>
           </section>
           <section className="am-container am-related am-instance">
-            <SmallIcon itemType="instance" />
-            <h3 className="am-section am-instance">Instances on this Server</h3>
+            <Heading headingType="related" itemType="instance" title="Instances on this Server" />
             <table className="am-table am-instance">
               <thead>
                 <tr>

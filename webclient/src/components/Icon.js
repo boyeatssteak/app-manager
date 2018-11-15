@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SmallIcon extends React.Component {
+class Icon extends React.Component {
 
   constructor(props) {
     super(props);
@@ -39,12 +39,27 @@ class SmallIcon extends React.Component {
 
   render() {
 
+    if(this.props.size == 'large') {
+      return (
+        <div className={"am-largeIcon am-" + this.props.itemType}>
+          <i className={this.state.icon}></i>
+        </div>
+      )
+    }
+
+    if(this.props.size == 'small') {
+      return (
+        <div className={"am-smallIcon am-" + this.props.itemType}>
+          <i className={this.state.icon}></i>
+        </div>
+      )
+    }
+
     return (
-      <div className={"am-smallIcon am-" + this.props.itemType}>
-        <i className={this.state.icon}></i>
-      </div>
+      <i className={this.state.icon}></i>
     )
+
   }
 }
 
-export default SmallIcon;
+export default Icon;

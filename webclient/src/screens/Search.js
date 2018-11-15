@@ -1,14 +1,13 @@
 import React from 'react';
 
-import LargeIcon from '../components/LargeIcon';
+import Heading from '../components/Heading';
 
 class Search extends React.Component {
   render() {
     return (
       <div className="container">
-        <LargeIcon itemType="search" />
-        <section className="am-container am-primary">
-          <h1>Search</h1>
+        <Heading headingType="main" itemType="search" itemDisplayName="Search" />
+        <section className="am-container">
           <p>Oh noes! This isn't finished yet.</p>
         </section>
       </div>

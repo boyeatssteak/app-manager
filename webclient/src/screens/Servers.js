@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Loading from '../components/Loading';
-import LargeIcon from '../components/LargeIcon';
+import Heading from '../components/Heading';
 
 class Servers extends React.Component {
   constructor(props) {
@@ -27,9 +27,8 @@ class Servers extends React.Component {
     if (this.state.hasLoaded) {
       return (
         <div className={"container am-" + this.state.itemType}>
-          <LargeIcon itemType={this.state.itemType} />
-          <section className="am-container am-primary">
-            <h1 className={"am-" + this.state.itemType}>{this.state.itemDisplayName}</h1>
+          <Heading headingType="main" itemType={this.state.itemType} itemDisplayName={this.state.itemDisplayName} />
+          <section className="am-container">
             <table className={"am-table am-" + this.state.itemType}>
               <thead>
                 <tr>
