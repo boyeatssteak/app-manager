@@ -8,13 +8,13 @@ color: var(--nanaBlue);
 */
 
 :root {
-  --app: #235942;
-  --instance: #60177a; --instanceLight: #dfd1e4;
-  --platform: #4a1e0b; --platformLight: #dbd2ce;
-  --secure: #dc0d08;
-  --server: #076cd8;
-  --user: #333685;
-  --vendor: #f1722f;
+  --app: #3336bb;
+  --instance: #07a7bf; --instanceLight: #dfd1e4;
+  --platform: #600088; --platformLight: #dbd2ce;
+  --secure: #d30b08;
+  --server: #236d00;
+  --user: #ff581f;
+  --vendor: #e3b632;
   --text: #333; --textLight: #999; --textDark: #555;
 }
 
@@ -78,7 +78,7 @@ button {
 }
 
 .am-container {
-  margin-left: 105px;
+  margin-left: 95px;
   padding: 0 7px;
 }
 .am-container.am-primary {
