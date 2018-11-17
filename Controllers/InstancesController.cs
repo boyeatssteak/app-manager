@@ -42,12 +42,48 @@ namespace AppManager.Controllers
 
             var instance = await _context.Instances.SingleOrDefaultAsync(m => m.Id == id);
 
+            var query =
+                new
+                {
+                    // instances {Id, Env, Url, Name, Status}
+                    instance,
+                    // application {Id, Name, Platform, PlatformId, Owner, OwnerId}
+                    application = 
+                    from application in _context.Applications
+                    join platform in _context.Platforms on application.PlatformId equals platform.Id
+                    join users in _context.Users on application.OwnerId equals users.Id
+                    where instance.AppId == application.Id
+                    select new
+                    {
+                        id = application.Id,
+                        name = application.Name,
+                        platformId = platform.Id,
+                        platform = platform.Name,
+                        ownerId = users.Id,
+                        owner = users.Name
+                    },
+                    // servers {Id, hostname, domain, ipAddress, opSystem, role}
+                    servers = 
+                    from _is in _context.InstanceServers
+                    join server in _context.Servers on _is.ServerId equals server.Id 
+                    where _is.InstanceId == instance.Id
+                    select new
+                    {
+                        id = server.Id,
+                        hostname = server.Hostname,
+                        domain = server.Domain,
+                        ipAddress = server.IpAddress,
+                        opSystem = server.OpSystem,
+                        role = server.Role
+                    }
+                };
+
             if (instance == null)
             {
                 return NotFound();
             }
 
-            return Ok(instance);
+            return Ok(query);
         }
 
         // PUT api/instances/3

@@ -8,6 +8,7 @@ import Applications from './screens/Applications';
 import AppDetail from './screens/AppDetail';
 import Home from './screens/Home';
 import Instances from './screens/Instances';
+import InstanceDetail from './screens/InstanceDetail';
 import Platforms from './screens/Platforms';
 import Search from './screens/Search';
 import Servers from './screens/Servers';
@@ -55,9 +56,17 @@ class Index extends React.Component {
           <Route exact path="/apps" render={(props) => <Applications {...props} fetchData={this.fetchData} /> } />
           <Route exact path="/apps/:appId" render={(props) => <AppDetail {...props} fetchData={this.fetchData} />} />
           <Route exact path="/instances" render={(props) => <Instances {...props} fetchData={this.fetchData} /> } />
+          <Route exact path="/instances/:instanceId" render={(props) => <InstanceDetail {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/platforms" render={(props) => <Platforms {...props} fetchData={this.fetchData} />} />
+          {/* <Route exact path="/platforms/:platformId" render={(props) => <PlatformDetail {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/secure" render={(props) => <SecureArea {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/secure/:secureId" render={(props) => <SecureAreaDetail {...props} fetchData={this.fetchData} />} /> */}
           <Route exact path="/servers" render={(props) => <Servers {...props} fetchData={this.fetchData} />} />
           <Route exact path="/servers/:serverId" render={(props) => <ServerDetail {...props} fetchData={this.fetchData} />} />
-          <Route exact path="/platforms" render={(props) => <Platforms {...props} fetchData={this.fetchData} />} />
+          {/* <Route exact path="/users" render={(props) => <Users {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/users/:userId" render={(props) => <UserDetail {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/vendors" render={(props) => <Vendors {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/vendors/:vendorId" render={(props) => <VendorDetail {...props} fetchData={this.fetchData} />} /> */}
           <Route exact path="/search" component={Search} />
         </div>
       </Router>

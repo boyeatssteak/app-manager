@@ -34,6 +34,7 @@ class Instances extends React.Component {
               <thead>
                 <tr>
                   <th className="am-name">Name</th>
+                  <th className="am-url">URL</th>
                   <th className="am-status">Status</th>
                 </tr>
               </thead>
@@ -41,6 +42,7 @@ class Instances extends React.Component {
                 {this.state.response.map((instance) => (
                   <tr key={instance.id}>
                     <td className="am-cell am-name am-primaryName"><Link className="am-instance" to={"/instances/" + instance.id}>{instance.name}</Link></td>
+                    <td className="am-cell am-url"><a href={instance.url} target="_blank">{instance.url}</a></td>
                     <td className="am-cell am-status">{instance.status}</td>
                   </tr>
                 ))}

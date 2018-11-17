@@ -39,7 +39,7 @@ class Icon extends React.Component {
 
   render() {
 
-    if(this.props.size == 'large') {
+    if(this.props.size === 'large') {
       return (
         <div className={"am-largeIcon am-" + this.props.itemType}>
           <i className={this.state.icon}></i>
@@ -47,7 +47,7 @@ class Icon extends React.Component {
       )
     }
 
-    if(this.props.size == 'small') {
+    if(this.props.size === 'small') {
       return (
         <div className={"am-smallIcon am-" + this.props.itemType}>
           <i className={this.state.icon}></i>
