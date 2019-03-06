@@ -1,8 +1,44 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Icon from './Icon';
 
 class Heading extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      addName: ""
+    }
+  }
+
+  componentDidMount() {
+    switch(this.props.itemType) {
+      case 'app':
+        this.setState({ addName: "Application" });
+        break;
+      case 'instance':
+        this.setState({ addName: "Instance" });
+        break;
+      case 'platform':
+        this.setState({ addName: "Platform" });
+        break;
+      case 'secure':
+        this.setState({ addName: "Secure Area" });
+        break;
+      case 'server':
+        this.setState({ addName: "Server" });
+        break;
+      case 'user':
+        this.setState({ addName: "Person" });
+        break;
+      case 'vendor':
+        this.setState({ addName: "Vendor" });
+        break;
+      default:
+        this.setState({ addName: "" });
+    }
+  }
 
   render() {
 
@@ -48,9 +84,13 @@ class Heading extends React.Component {
 
     if (this.props.headingType === 'related') {
       return(
-        <div>
+        <div className="am-heading">
           <Icon size="small" itemType={this.props.itemType} />
-          <h3 className={"am-section am-" + this.props.itemType}>{this.props.title}</h3>
+          <h3 className={"am-section am-" + this.props.itemType}>{this.props.title}
+            {this.props.displayAddNew ?
+            <Link to="#" className="am-addItem"><span><i class="fas fa-plus"></i> Add New {this.state.addName}</span></Link> : ""
+            }
+          </h3>
         </div>
       )
     }

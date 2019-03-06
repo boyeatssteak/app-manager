@@ -42,12 +42,46 @@ namespace AppManager.Controllers
 
             var platform = await _context.Platforms.SingleOrDefaultAsync(m => m.Id == id);
 
+            var query =
+                new
+                {
+                    // platform {id, name, description, vendorId, vendor*, vendorDocs, internalDocs}
+                    platform =
+                    from plat in _context.Platforms
+                    join vendor in _context.Vendors on plat.VendorId equals vendor.Id
+                    where plat.Id == platform.Id
+                    select new
+                    {
+                        id = plat.Id,
+                        name = plat.Name,
+                        desc = plat.Description,
+                        vendorId = plat.VendorId,
+                        vendor = vendor.Name,
+                        vendorDocs = plat.VendorDocs,
+                        internalDocs = plat.InternalDocs
+                    },
+                    // applications {id, name, description, status, ownerId, owner*}
+                    applications =
+                    from app in _context.Applications
+                    join user in _context.Users on app.OwnerId equals user.Id
+                    where app.PlatformId == platform.Id
+                    select new
+                    {
+                        id = app.Id,
+                        name = app.Name,
+                        desc = app.Description,
+                        status = app.Status,
+                        ownerId = app.OwnerId,
+                        owner = user.Name
+                    }
+                };
+
             if (platform == null)
             {
                 return NotFound();
             }
 
-            return Ok(platform);
+            return Ok(query);
         }
 
         // PUT api/platforms/3

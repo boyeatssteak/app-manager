@@ -32,8 +32,8 @@ class InstanceDetail extends React.Component {
           <Heading headingType="detail" itemType={this.state.itemType} itemDisplayName={this.state.itemDisplayName} title={this.state.response.instance.name} />
           <section className={"am-container am-details am-" + this.state.itemType}>
             <div className="am-row">
-              <div><span className="am-detailTitle">Env:</span> {this.state.response.instance.environment}</div>
               <div><span className="am-detailTitle">URL:</span> <a href={this.state.response.instance.url} target="_blank">{this.state.response.instance.url}</a></div>
+              <div><span className="am-detailTitle">Env:</span> {this.state.response.instance.environment}</div>
               <div><span className="am-detailTitle">Status:</span> {this.state.response.instance.status}</div>
             </div>
           </section>
@@ -52,7 +52,7 @@ class InstanceDetail extends React.Component {
             </div>
           </section>
           <section className="am-container am-related am-server">
-            <Heading headingType="related" itemType="server" title="Servers utilized" />
+            <Heading headingType="related" itemType="server" title="Servers Utilized" displayAddNew />
             <table className="am-table am-server">
               <thead>
                 <tr>

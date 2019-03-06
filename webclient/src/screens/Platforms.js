@@ -41,7 +41,7 @@ class Platforms extends React.Component {
               <tbody>
                 {this.state.response.map((platform) => (
                   <tr key={platform.id}>
-                    <td className="am-cell am-name am-primaryName"><Link className="am-platform" to={"/platform/" + platform.id}>{platform.name}</Link></td>
+                    <td className="am-cell am-name am-primaryName"><Link className="am-platform" to={"/platforms/" + platform.id}>{platform.name}</Link></td>
                     <td className="am-cell am-vendor">{platform.vendorId}</td>
                     <td className="am-cell am-description">{platform.description}</td>
                   </tr>

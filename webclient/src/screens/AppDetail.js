@@ -47,7 +47,7 @@ class AppDetail extends React.Component {
             </div>
           </section>
           <section className="am-container am-related am-instance">
-            <Heading headingType="related" itemType="instance" title="Instances of this Application" />
+            <Heading headingType="related" itemType="instance" title="Instances of this Application" displayAddNew />
             <table className="am-table am-instance">
               <thead>
                 <tr>
@@ -80,7 +80,7 @@ class AppDetail extends React.Component {
             </table>
           </section>
           <section className="am-container am-related am-secureArea">
-            <Heading headingType="related" itemType="secure" title="Secure Areas of this Application" />
+            <Heading headingType="related" itemType="secure" title="Secure Areas of this Application" displayAddNew />
             <table className="am-table am-secure">
               <thead>
                 <tr>
