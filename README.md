@@ -1,3 +1,6 @@
+# Current Status
+Backend API probalby 90% complete, may need some minor adjustments. Frontend is WIP, needs full CRUD functions.
+
 # app-manager
 **A reference tool for keeping track of servers and applications, their environments and relationships.**
 The idea behind this web application would be to help IT teams work more efficiently by having a simple resource that parties in different roles can reference when they need information.
