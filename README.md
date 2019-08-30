@@ -1,5 +1,5 @@
 # Current Status
-Backend API probalby 90% complete, may need some minor adjustments. Frontend is WIP, needs full CRUD functions.
+Backend API probalby 80% complete, may need some minor adjustments. Frontend is WIP, needs full CRUD functions.
 
 # app-manager
 **A reference tool for keeping track of servers and applications, their environments and relationships.**
@@ -83,13 +83,3 @@ An area of a application that has unique access permissions compared to the main
 
 ### Other
 Comments/Notes, Vendors, Users
-
-## Future Features
- - New applications created with a specific platform would inherit relevant secure areas, authentication methods, documentation, and auto-create appropriate default secure areas (SharePoint Central Admin, WordPRess Dahsboard) with app owner as secure area owner
- - Audit log and/or versioning
- - Store license information (single licenses area, users chooses whether license applies to app, instance, etc?)
- - Granular security controls
- - Reports such as server vs instance environment conflicts, recommended decoms, etc
- - Digital approval of system access requests
- - Track popular clicks in order to have homepage surface likely servers/apps/instances that users may be looking for
- - Add security, maybe initially just support basic LDAP authorization
