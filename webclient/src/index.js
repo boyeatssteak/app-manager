@@ -12,6 +12,8 @@ import InstanceDetail from './screens/InstanceDetail';
 import Platforms from './screens/Platforms';
 import PlatformDetail from './screens/PlatformDetail';
 import Search from './screens/Search';
+import SecureAreas from './screens/Secure';
+import SecureAreaDetail from './screens/SecureDetail';
 import Servers from './screens/Servers';
 import ServerDetail from './screens/ServerDetail';
 
@@ -60,8 +62,8 @@ class Index extends React.Component {
           <Route exact path="/instances/:instanceId" render={(props) => <InstanceDetail {...props} fetchData={this.fetchData} />} />
           <Route exact path="/platforms" render={(props) => <Platforms {...props} fetchData={this.fetchData} />} />
           <Route exact path="/platforms/:platformId" render={(props) => <PlatformDetail {...props} fetchData={this.fetchData} />} />
-          {/* <Route exact path="/secure" render={(props) => <SecureArea {...props} fetchData={this.fetchData} />} />
-          <Route exact path="/secure/:secureId" render={(props) => <SecureAreaDetail {...props} fetchData={this.fetchData} />} /> */}
+          <Route exact path="/secure" render={(props) => <SecureAreas {...props} fetchData={this.fetchData} />} />
+          <Route exact path="/secure/:secureId" render={(props) => <SecureAreaDetail {...props} fetchData={this.fetchData} />} />
           <Route exact path="/servers" render={(props) => <Servers {...props} fetchData={this.fetchData} />} />
           <Route exact path="/servers/:serverId" render={(props) => <ServerDetail {...props} fetchData={this.fetchData} />} />
           {/* <Route exact path="/users" render={(props) => <Users {...props} fetchData={this.fetchData} />} />
